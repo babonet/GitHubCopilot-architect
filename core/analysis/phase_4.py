@@ -13,7 +13,7 @@ import logging  # Used for logging messages
 from typing import Dict  # Used for type hinting, making code more readable
 from core.agents.openai import OpenAIAgent  # The OpenAI agent class
 from config.prompts.phase_4_prompts import PHASE_4_PROMPT, format_phase4_prompt  # Prompts for Phase 4
-from config.agents import get_architect_for_phase  # Added import for dynamic model configuration
+from core.agents import get_architect_for_phase  # Added import for dynamic model configuration
 
 # ====================================================
 # Logger Initialization

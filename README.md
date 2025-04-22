@@ -38,7 +38,7 @@ CursorRules Architect V2 is an advanced multi-agent system that analyzes your co
 - Python 3.8+
 - API keys for at least one of the supported providers:
   - Anthropic API key with access to `claude-3-7-sonnet-20250219`
-  - OpenAI API key with access to `o1`, `o3-mini`, or `gpt-4o`
+  - OpenAI API key with access to `o1`, `o3-mini`, or `gpt-4.1`
   - DeepSeek API key with access to DeepSeek Reasoner
   - Google API key with access to `gemini-2.0-flash` or `gemini-2.5-pro-exp-03-25`
 - Dependencies:
@@ -136,9 +136,9 @@ O3_MINI_MEDIUM = ModelConfig(
     reasoning=ReasoningMode.MEDIUM
 )
 
-GPT4O_CREATIVE = ModelConfig(
+GPT4_1_CREATIVE = ModelConfig(
     provider=ModelProvider.OPENAI,
-    model_name="gpt-4o",
+    model_name="gpt-4.1",
     reasoning=ReasoningMode.TEMPERATURE,
     temperature=0.9
 )
@@ -211,7 +211,7 @@ CursorRules Architect V2 follows a sophisticated multi-phase analysis approach:
 The system is built on a `BaseArchitect` abstract class that standardizes how different AI model providers are integrated:
 
 - `AnthropicArchitect` - Interface to Anthropic's Claude models
-- `OpenAIArchitect` - Interface to OpenAI's models (o1, o3-mini, gpt-4o)
+- `OpenAIArchitect` - Interface to OpenAI's models (o1, o3-mini, gpt-4.1)
 - `DeepSeekArchitect` - Interface to DeepSeek's reasoning models
 - `GeminiArchitect` - Interface to Google's Gemini models
 
@@ -275,7 +275,7 @@ The system supports different reasoning modes depending on the model:
 - For OpenAI models:
   - For O1 and O3-mini:
     - `LOW`/`MEDIUM`/`HIGH` - Different reasoning effort levels
-  - For GPT-4o:
+  - For gpt-4.1:
     - `TEMPERATURE` - Use temperature-based sampling
 
 - For DeepSeek models:
@@ -382,7 +382,7 @@ The system's key innovation is the dynamic agent creation process:
 You can run the system with one or more AI providers:
 
 - **Anthropic-only**: Set all phases to use Claude models
-- **OpenAI-only**: Set all phases to use o1, o3-mini, or gpt-4o
+- **OpenAI-only**: Set all phases to use o1, o3-mini, or gpt-4.1
 - **DeepSeek-only**: Set all phases to use DeepSeek Reasoner
 - **Gemini-only**: Set all phases to use Google Gemini models
 - **Mix and match**: Use different providers for different phases

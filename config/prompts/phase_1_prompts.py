@@ -7,7 +7,7 @@ modifying the core logic of the agents.
 """
 
 # Base prompt template for all Phase 1 agents
-PHASE_1_BASE_PROMPT = """You are the {agent_name}, responsible for {agent_role}.
+PHASE_1_BASE_PROMPT = """You are a {agent_name}, responsible for {agent_role}.
 
 Your specific responsibilities are:
 {agent_responsibilities}

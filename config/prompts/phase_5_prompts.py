@@ -19,7 +19,7 @@ Your tasks:
 2. Organize by component/module
 3. Create comprehensive documentation
 4. Highlight key discoveries
-5. Prepare final report for o1"""
+5. Prepare final report"""
 
 def format_phase5_prompt(results: Dict) -> str:
     """

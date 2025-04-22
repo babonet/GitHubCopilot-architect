@@ -5,7 +5,7 @@ alwaysApply: false
 ---
 The Final Analysis phase is the culmination of the entire project analysis pipeline. It takes the consolidated report from Phase 5 and transforms it into actionable Cursor rules for the Cursor IDE. Here's what it does:
 
-1. It uses an AI model (configured to be GPT-4o Precise by default in `agents.py`) to analyze the consolidated report from Phase 5.
+1. It uses an AI model (configured to be gpt-4.1 Precise by default in `agents.py`) to analyze the consolidated report from Phase 5.
 
 2. The `FinalAnalysis` class initializes the appropriate architect via `get_architect_for_phase("final")` and then calls its `final_analysis` method with the consolidated report and a formatted prompt.
 

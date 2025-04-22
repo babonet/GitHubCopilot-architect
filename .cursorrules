@@ -208,11 +208,15 @@ async def run_async_chat():
 │   │   ├── phase_5_prompts.py
 ├── core
 │   ├── __init__.py
+│   ├── agent_tools
+│   │   ├── tavily.py
+│   │   ├── tool_manager.py
 │   ├── agents
 │   │   ├── __init__.py
 │   │   ├── anthropic.py
 │   │   ├── base.py
 │   │   ├── deepseek.py
+│   │   ├── factory.py
 │   │   ├── gemini.py
 │   │   ├── openai.py
 │   ├── analysis
@@ -226,12 +230,15 @@ async def run_async_chat():
 │   ├── types
 │   │   ├── __init__.py
 │   │   ├── agent_config.py
+│   │   ├── models.py
+│   │   ├── tool_config.py
 │   ├── utils
 │   │   ├── file_creation
 │   │   │   ├── cursorignore.py
 │   │   │   ├── phases_output.py
 │   │   ├── tools
 │   │   │   ├── agent_parser.py
+│   │   │   ├── clean_cursorrules.py
 │   │   │   ├── file_retriever.py
 │   │   │   ├── model_config_helper.py
 │   │   │   ├── tree_generator.py
@@ -245,6 +252,7 @@ async def run_async_chat():
 │   │   │   ├── final_analysis_results.json
 │   │   ├── run_test.py
 │   │   ├── test_date.py
+│   │   ├── test_final_analysis.py
 │   ├── phase_1_test
 │   │   ├── output
 │   │   │   ├── phase1_results.json
@@ -274,11 +282,15 @@ async def run_async_chat():
 │   │   │   ├── phase5_results.json
 │   │   ├── run_test.py
 │   │   ├── test5_input.json
+│   ├── test_env.py
 │   ├── tests_input
 │   │   ├── README.md
 │   │   ├── index.html
 │   │   ├── main.py
 │   │   ├── requirements.txt
 │   ├── utils
+│   │   ├── clean_cr_test.py
+│   │   ├── inputs
+│   │   ├── outputs
 │   │   ├── run_tree_generator.py
 </project_structure>

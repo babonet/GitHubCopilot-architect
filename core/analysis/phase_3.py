@@ -18,7 +18,7 @@ from pathlib import Path
 import os
 from core.agents.anthropic import AnthropicArchitect
 from core.utils.tools.file_retriever import get_filtered_formatted_contents
-from config.agents import get_architect_for_phase
+from core.agents import get_architect_for_phase
 from config.prompts.phase_3_prompts import format_phase3_prompt
 
 # ====================================================

@@ -259,7 +259,7 @@ Explicitly identify anti-patterns, incorrect approaches, and behaviors to avoid.
 
 - Created complex class hierarchies for no reason
 - Built a fake "intent extraction" system using string matching
-- Wrote 500 lines of code to do what GPT-4o can do naturally
+- Wrote 500 lines of code to do what gpt-4.1 can do naturally
 
 ## Faking "AI" Behavior
 
@@ -303,7 +303,7 @@ As you learn the new {current_year} architecture, document your newly gained kno
 ## Examples of documented learnings:
 
 - For search results, ensure proper handling of different character encodings (UTF-8) for international queries
-- Use 'gpt-4o' as the model name for ALL OpenAI models
+- Use 'gpt-4.1' as the model name for ALL OpenAI models
 
 ```
 

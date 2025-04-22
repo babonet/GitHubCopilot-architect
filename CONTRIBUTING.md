@@ -37,7 +37,7 @@ To get started with development, you'll need to set up your local environment.
 
 - Python 3.8 or higher
 - API keys for at least one of the following providers:
-  - OpenAI API key with access to `o1`, `o3-mini`, or `gpt-4o`
+  - OpenAI API key with access to `o1`, `o3-mini`, or `gpt-4.1`
   - Anthropic API key with access to `claude-3-7-sonnet-20250219` 
   - DeepSeek API key with access to DeepSeek Reasoner
 - Git
@@ -207,7 +207,7 @@ CursorRules Architect V2 supports multiple AI models:
 - **OpenAI**:
   - `o1` (with low/medium/high reasoning)
   - `o3-mini` (with low/medium/high reasoning)
-  - `gpt-4o` (with temperature control)
+  - `gpt-4.1` (with temperature control)
 
 - **DeepSeek**:
   - DeepSeek Reasoner (always with reasoning enabled)

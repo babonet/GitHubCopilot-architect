@@ -20,7 +20,7 @@ import logging
 from typing import Dict
 from anthropic import Anthropic
 from config.prompts.phase_5_prompts import PHASE_5_PROMPT, format_phase5_prompt
-from config.agents import get_architect_for_phase  # Added import for dynamic model configuration
+from core.agents import get_architect_for_phase
 
 # =============================================================================
 # Initialize the Anthropic Client and Logger

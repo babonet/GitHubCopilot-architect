@@ -20,7 +20,7 @@ from config.prompts.phase_1_prompts import ( # Prompts used for configuring the 
     DEPENDENCY_AGENT_PROMPT,
     TECH_STACK_AGENT_PROMPT,
 )
-from config.agents import get_architect_for_phase  # Function to get the appropriate architect for a phase
+from core.agents import get_architect_for_phase  # Function to get the appropriate architect for a phase
 import logging  # For logging information about the execution
 from rich import print
 

@@ -75,7 +75,7 @@ class OpenAIArchitect(BaseArchitect):
         Args:
             model_name: The OpenAI model to use (default: "o1")
             reasoning: Reasoning mode (defaults based on model type)
-            temperature: Temperature value for temperature-based models like GPT-4o
+            temperature: Temperature value for temperature-based models like gpt-4.1
             name: Optional name for specialized roles
             role: Optional role description
             responsibilities: Optional list of responsibilities
@@ -85,14 +85,14 @@ class OpenAIArchitect(BaseArchitect):
         if reasoning is None:
             if model_name in ["o1", "o3-mini"]:
                 reasoning = ReasoningMode.HIGH
-            elif model_name == "gpt-4o":
+            elif model_name == "gpt-4.1":
                 reasoning = ReasoningMode.TEMPERATURE
             else:
                 reasoning = ReasoningMode.DISABLED
         
-        # Set default temperature for GPT-4o if not specified
-        if model_name == "gpt-4o" and temperature is None and reasoning == ReasoningMode.TEMPERATURE:
-            temperature = 0.7  # Default temperature for GPT-4o
+        # Set default temperature for gpt-4.1 if not specified
+        if model_name == "gpt-4.1" and temperature is None and reasoning == ReasoningMode.TEMPERATURE:
+            temperature = 0.7  # Default temperature for gpt-4.1
         
         super().__init__(
             provider=ModelProvider.OPENAI,
@@ -176,8 +176,8 @@ Format your response as a structured report with clear sections and findings."""
             else:
                 # Default to MEDIUM if not specified or using DISABLED
                 params["reasoning_effort"] = "medium"
-        elif self.model_name == "gpt-4o" or self.reasoning == ReasoningMode.TEMPERATURE:
-            # For temperature-based models like GPT-4o
+        elif self.model_name == "gpt-4.1" or self.reasoning == ReasoningMode.TEMPERATURE:
+            # For temperature-based models like gpt-4.1
             if self.temperature is not None:
                 params["temperature"] = self.temperature
         
@@ -392,14 +392,14 @@ class OpenAIAgent:
         
         Args:
             model: The OpenAI model to use (default: "o1")
-            temperature: Temperature value for temperature-based models like GPT-4o
+            temperature: Temperature value for temperature-based models like gpt-4.1
         """
         self.model = model
         
         # Create underlying OpenAIArchitect with appropriate reasoning mode
         if model in ["o1", "o3-mini"]:
             self._architect = OpenAIArchitect(model_name=model, reasoning=ReasoningMode.HIGH)
-        elif model == "gpt-4o":
+        elif model == "gpt-4.1":
             self._architect = OpenAIArchitect(model_name=model, reasoning=ReasoningMode.TEMPERATURE, temperature=temperature)
         else:
             self._architect = OpenAIArchitect(model_name=model)

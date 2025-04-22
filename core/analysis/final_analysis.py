@@ -14,7 +14,7 @@ import logging  # Used for logging events and errors.
 from typing import Dict, List  # Used for type hinting.
 from core.agents.openai import OpenAIAgent  # Custom class for interacting with OpenAI models.
 from config.prompts.final_analysis_prompt import format_final_analysis_prompt  # Function to format the final analysis prompt.
-from config.agents import get_architect_for_phase  # Import for dynamic model configuration
+from core.agents import get_architect_for_phase  # Import for dynamic model configuration
 
 # ====================================================
 # Logger Setup

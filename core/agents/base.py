@@ -33,7 +33,7 @@ class ReasoningMode(Enum):
     MEDIUM = "medium"
     HIGH = "high"
     
-    # For temperature-based models like GPT-4o, use TEMPERATURE mode
+    # For temperature-based models like gpt-4.1, use TEMPERATURE mode
     # and specify the actual temperature value separately
     TEMPERATURE = "temperature"
 
