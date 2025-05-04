@@ -1,12 +1,10 @@
 {
     "recommendations": [
-        "github.copilot",
-        "github.copilot-chat",
-        "ms-python.python",
-        "ms-python.vscode-pylance",
-        "ms-python.black-formatter",
-        "ms-python.flake8",
-        "ms-azuretools.vscode-azureresourcegroups",
-        "ms-azuretools.vscode-azurefunctions"
+        "github.copilot", // GitHub Copilot for AI-powered code suggestions
+        "github.copilot-chat", // GitHub Copilot Chat for interactive AI assistance
+        "ms-python.python", // Python extension for development
+        "ms-python.vscode-pylance", // Pylance for Python type checking and IntelliSense
+        "ms-python.black-formatter", // Black formatter for Python code formatting
+        "ms-python.flake8", // Flake8 for Python linting
     ]
 }

@@ -26,15 +26,13 @@ if os.path.exists('.env'):
 else:
     logging.warning("No .env file found. Make sure API keys are set in environment variables.")
 
-from openai import OpenAI  # For interacting with the OpenAI API
-from anthropic import Anthropic  # For interacting with the Anthropic API
+from openai import AzureOpenAI  # For interacting with Azure OpenAI API
 import asyncio  # For asynchronous programming (running multiple tasks concurrently)
 from config.exclusions import EXCLUDED_DIRS, EXCLUDED_FILES, EXCLUDED_EXTENSIONS  # Import exclusion lists from config
 from core.utils.file_creation.phases_output import save_phase_outputs  # Import the save_phase_outputs function
 from core.utils.file_creation.cursorignore import create_cursorignore  # Import the create_cursorignore function
 from core.utils.tools.clean_cursorrules import clean_cursorrules  # Import the clean_cursorrules function
 from core.utils.tools.tree_generator import get_project_tree  # Import the tree generator function
-from core.agents.openai import OpenAIAgent  # Import the OpenAIAgent class
 # Import all phase analysis classes from the core.analysis package
 from core.analysis import (
     Phase1Analysis,
@@ -47,10 +45,9 @@ from core.analysis import (
 # Import the helper to get model configuration names
 from core.utils.tools.model_config_helper import get_model_config_name
 
-# Initialize clients for OpenAI and Anthropic APIs.  These are used to access
-# external AI models.
-openai_client = OpenAI()
-anthropic_client = Anthropic()
+# Initialize Azure OpenAI client. This is used to access
+# Azure AI models.
+# Note: Azure OpenAI client will be initialized by the architect when needed
 
 # Setup logging.  This configures how log messages are displayed.
 console = Console()
@@ -58,21 +55,12 @@ console = Console()
 # Filter HTTP request logs
 class HTTPRequestFilter(logging.Filter):
     def filter(self, record):
-        # Filter out detailed HTTP request logs from OpenAI, Anthropic, etc.
+        # Filter out detailed HTTP request logs from Azure OpenAI
         if "HTTP Request:" in record.getMessage():
             # Extract and modify the message to show only important parts
             msg = record.getMessage()
-            if "api.openai.com" in msg:
-                record.msg = "Using OpenAI model"
-                return True
-            elif "api.anthropic.com" in msg:
-                record.msg = "Using Anthropic model"
-                return True
-            elif "generativelanguage.googleapis.com" in msg:
-                record.msg = "Using Google Gemini model"
-                return True
-            elif "api.deepseek.com" in msg:
-                record.msg = "Using DeepSeek model"
+            if "openai.azure.com" in msg:
+                record.msg = "Using Azure OpenAI model"
                 return True
             return False
         return True
@@ -90,7 +78,7 @@ http_filter = HTTPRequestFilter()
 logger.addFilter(http_filter)
 
 # Also filter the OpenAI and httpx loggers
-for logger_name in ["openai", "httpx", "httpcore", "anthropic", "google", "genai"]:
+for logger_name in ["openai", "httpx", "httpcore", "azure"]:
     mod_logger = logging.getLogger(logger_name)
     mod_logger.setLevel(logging.WARNING)  # Only show warnings and errors
 
