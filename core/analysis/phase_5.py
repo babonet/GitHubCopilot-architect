@@ -18,7 +18,6 @@
 import json
 import logging
 from typing import Dict
-from anthropic import Anthropic
 from config.prompts.phase_5_prompts import PHASE_5_PROMPT, format_phase5_prompt
 from core.agents import get_architect_for_phase
 
@@ -27,8 +26,9 @@ from core.agents import get_architect_for_phase
 # This section initializes the Anthropic client for API calls and sets up
 # logging to track the process.
 # =============================================================================
-anthropic_client = Anthropic()
+
 logger = logging.getLogger("project_extractor")
+
 
 # =============================================================================
 # Phase 5 Analysis Class
@@ -37,11 +37,11 @@ logger = logging.getLogger("project_extractor")
 class Phase5Analysis:
     """
     Class responsible for Phase 5 (Consolidation) of the project analysis.
-    
-    This phase uses a model configured in config/agents.py to consolidate 
+
+    This phase uses a model configured in config/agents.py to consolidate
     the results from all previous phases into a comprehensive final report.
     """
-    
+
     # =========================================================================
     # Initialization Method
     # Sets up the Phase 5 analysis with the model from configuration.
@@ -52,7 +52,7 @@ class Phase5Analysis:
         """
         # Use the factory function to get the appropriate architect based on configuration
         self.architect = get_architect_for_phase("phase5")
-    
+
     # =========================================================================
     # Run Method
     # Executes the consolidation phase using the configured model.
@@ -60,39 +60,46 @@ class Phase5Analysis:
     async def run(self, all_results: Dict) -> Dict:
         """
         Run the Consolidation Phase using the configured model.
-        
+
         Args:
             all_results: Dictionary containing the results from all previous phases
-            
+
         Returns:
             Dictionary containing the consolidated report
         """
         try:
             # Format the prompt using the template from the prompts file
             prompt = format_phase5_prompt(all_results)
-            
-            logger.info("[bold]Phase 5:[/bold] Consolidating results from all previous phases")
-            
+
+            logger.info(
+                "[bold]Phase 5:[/bold] Consolidating results from all previous phases"
+            )
+
             # Use the architect to consolidate results
             result = await self.architect.consolidate_results(all_results, prompt)
-            
-            logger.info("[bold green]Phase 5:[/bold green] Consolidation completed successfully")
-            
+
+            logger.info(
+                "[bold green]Phase 5:[/bold green] Consolidation completed successfully"
+            )
+
             # Return the result, ensuring it has the expected format
             if "report" not in result and "error" not in result:
                 if "phase" in result and isinstance(result.get("phase"), str):
                     return result  # Already in the expected format
                 else:
                     # Extract findings if available
-                    findings = result.get("findings", "No consolidated report generated")
+                    findings = result.get(
+                        "findings", "No consolidated report generated"
+                    )
                     return {
                         "phase": "Consolidation",
-                        "report": findings if isinstance(findings, str) else json.dumps(findings)
+                        "report": (
+                            findings
+                            if isinstance(findings, str)
+                            else json.dumps(findings)
+                        ),
                     }
             return result
         except Exception as e:
             logger.error(f"[bold red]Error in Phase 5:[/bold red] {str(e)}")
-            return {
-                "phase": "Consolidation",
-                "error": str(e)
-            }
+            return {"phase": "Consolidation", "error": str(e)}

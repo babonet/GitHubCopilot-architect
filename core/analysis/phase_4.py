@@ -11,9 +11,13 @@ It defines the methods needed for synthesizing the findings from Phase 3.
 
 import logging  # Used for logging messages
 from typing import Dict  # Used for type hinting, making code more readable
-from core.agents.openai import OpenAIAgent  # The OpenAI agent class
-from config.prompts.phase_4_prompts import PHASE_4_PROMPT, format_phase4_prompt  # Prompts for Phase 4
-from core.agents import get_architect_for_phase  # Added import for dynamic model configuration
+from config.prompts.phase_4_prompts import (
+    PHASE_4_PROMPT,
+    format_phase4_prompt,
+)  # Prompts for Phase 4
+from core.agents import (
+    get_architect_for_phase,
+)  # Added import for dynamic model configuration
 
 # ====================================================
 # Logger Initialization
@@ -28,14 +32,15 @@ logger = logging.getLogger("project_extractor")
 # This class handles the Phase 4 (Synthesis) of the project analysis.
 # ====================================================
 
+
 class Phase4Analysis:
     """
     Class responsible for Phase 4 (Synthesis) of the project analysis.
-    
+
     This phase uses a model configured in config/agents.py to synthesize the findings from Phase 3,
     providing a deeper analysis and updated directions.
     """
-    
+
     # ====================================================
     # Initialization Method
     # Sets up the Phase 4 analysis with the OpenAI agent.
@@ -54,24 +59,28 @@ class Phase4Analysis:
     async def run(self, phase3_results: Dict) -> Dict:
         """
         Run the Synthesis Phase using the configured model.
-        
+
         Args:
             phase3_results: Dictionary containing the results from Phase 3
-            
+
         Returns:
             Dictionary containing the synthesis and token usage
         """
         try:
             # Format the prompt using the template from the prompts file
             prompt = format_phase4_prompt(phase3_results)
-            
-            logger.info("[bold]Phase 4:[/bold] Synthesizing findings from all analysis agents")
-            
+
+            logger.info(
+                "[bold]Phase 4:[/bold] Synthesizing findings from all analysis agents"
+            )
+
             # Use the architect to synthesize findings from Phase 3
             result = await self.architect.synthesize_findings(phase3_results, prompt)
-            
-            logger.info("[bold green]Phase 4:[/bold green] Synthesis completed successfully")
-            
+
+            logger.info(
+                "[bold green]Phase 4:[/bold green] Synthesis completed successfully"
+            )
+
             return result
         except Exception as e:
             logger.error(f"[bold red]Error in Phase 4:[/bold red] {str(e)}")

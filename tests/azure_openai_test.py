@@ -1,4 +1,3 @@
-
 """
 Test script for Azure OpenAI integration.
 
@@ -41,16 +40,17 @@ async def test_azure_openai():
     """Test the Azure OpenAI integration."""
     # Load environment variables
     load_dotenv()
-    
+
     # Check if the required environment variables are set
     azure_endpoint = os.environ.get("AZURE_ENDPOINT")
     azure_api_key = os.environ.get("AZURE_API_KEY")
-    
+
     if not azure_endpoint or not azure_api_key:
         print_color("Error: AZURE_ENDPOINT and AZURE_API_KEY must be set in .env file", "red")
         return False
-        print_color("Azure OpenAI environment variables found", "green")
-    
+
+    print_color("Azure OpenAI environment variables found", "green")
+
     try:
         # Create an instance of AzureOpenAIArchitect
         deployment = os.environ.get("AZURE_DEPLOYMENT", "gpt-4o")
@@ -61,14 +61,14 @@ async def test_azure_openai():
             "temperature": 0.7,
             "max_tokens": 1000
         }
-        
+
         architect = AzureOpenAIArchitect(
             model_config=model_config,
             system_prompt="You are a code analysis assistant."
         )
-        
+
         print_color("Successfully created AzureOpenAIArchitect instance", "green")
-        
+
         # Test a simple query
         messages = [
             {
@@ -80,15 +80,39 @@ async def test_azure_openai():
                 "content": "What are the best practices for structuring a Python project?"
             }
         ]
-        
+
         print_color("Sending test query to Azure OpenAI...", "blue")
         response = await architect._call_azure_openai(messages)
-        
+
+        # Parse the response as a dictionary
+        if isinstance(response, str):
+            response = json.loads(response)
+
+        # Validate the response structure
+        assert isinstance(response, dict), "Response should be a dictionary"
+        assert "choices" in response, "Response should contain 'choices'"
+        assert isinstance(response["choices"], list), "'choices' should be a list"
+        assert len(response["choices"]) > 0, "Response should have at least one choice"
+
         print_color("\nResponse from Azure OpenAI:", "yellow")
-        print(response)
-        
+        print(json.dumps(response, indent=2))
+
+        # Additional test case: Invalid input
+        invalid_messages = [
+            {
+                "role": "user",
+                "content": ""
+            }
+        ]
+        print_color("\nSending invalid test query to Azure OpenAI...", "blue")
+        try:
+            invalid_response = await architect._call_azure_openai(invalid_messages)
+            print_color("Invalid input test passed unexpectedly", "red")
+        except Exception as e:
+            print_color(f"Invalid input test failed as expected: {e}", "green")
+
         return True
-    
+
     except Exception as e:
         print_color(f"Error: {e}", "red")
         return False

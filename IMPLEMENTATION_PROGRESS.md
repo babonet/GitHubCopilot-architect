@@ -81,11 +81,11 @@ This document tracks progress on adapting the CursorRules Architect for VSCode a
 ## 5. Next Steps
 
 - [x] Clean up unused agent implementations (Anthropic, OpenAI, DeepSeek, Google Gemini)
-- [ ] Update the VSCode extension recommendations
-  - [ ] Create or update .vscode/extensions.json with GitHub Copilot recommendations
-  - [ ] Verify extension compatibility with the updated architecture
+- [x] Update the VSCode extension recommendations
+  - [x] Create or update .vscode/extensions.json with GitHub Copilot recommendations
+  - [x] Verify extension compatibility with the updated architecture
 - [ ] Test integration with Azure OpenAI
-  - [ ] Run the existing Azure OpenAI tests
+  - [x] Run the existing Azure OpenAI tests
   - [ ] Update tests to ensure proper Azure OpenAI calls and responses
   - [ ] Verify the system works end-to-end with Azure OpenAI
 - [ ] Complete documentation updates
