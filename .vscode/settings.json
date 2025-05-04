@@ -1,5 +1,14 @@
 {
     "files.associations": {
         "*.cursorrules": "markdown"
-    }
+    },
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": true,
+        "markdown": true,
+        "python": true
+    },
+    "editor.formatOnSave": true,
+    "python.linting.enabled": true,
+    "python.analysis.typeCheckingMode": "basic"
 }

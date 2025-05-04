@@ -10,20 +10,10 @@ Users can specify a different model for each phase and whether to use reasoning.
 
 from core.types.models import (
     ModelConfig,
-    CLAUDE_BASIC,
-    CLAUDE_WITH_REASONING,
-    O1_HIGH,
-    O1_MEDIUM,
-    O1_LOW,
-    O3_MINI_HIGH, 
-    O3_MINI_MEDIUM,
-    O3_MINI_LOW,
-    GPT4_1_DEFAULT,
-    GPT4_1_CREATIVE,
-    GPT4_1_PRECISE,
-    DEEPSEEK_REASONER,
-    GEMINI_BASIC,
-    GEMINI_WITH_REASONING
+    AZURE_GPT4O_DEFAULT,
+    AZURE_GPT4O_CREATIVE,
+    AZURE_GPT4O_PRECISE,
+    AZURE_GPT4_TURBO
 )
 
 # ====================================================
@@ -31,23 +21,23 @@ from core.types.models import (
 # Define which model to use for each phase.
 # ====================================================
 
-# Default model configuration
+# Default model configuration using Azure OpenAI
 MODEL_CONFIG = {
     # Phase 1: Initial Discovery
-    "phase1": GPT4_1_PRECISE,
+    "phase1": AZURE_GPT4O_PRECISE,
     
     # Phase 2: Methodical Planning
-    "phase2": GEMINI_BASIC,
+    "phase2": AZURE_GPT4O_DEFAULT,
     
     # Phase 3: Deep Analysis
-    "phase3": GEMINI_BASIC,
+    "phase3": AZURE_GPT4O_DEFAULT,
     
     # Phase 4: Synthesis
-    "phase4": GEMINI_BASIC,
+    "phase4": AZURE_GPT4O_DEFAULT,
     
     # Phase 5: Consolidation
-    "phase5": GEMINI_BASIC,
+    "phase5": AZURE_GPT4O_CREATIVE,
     
     # Final Analysis
-    "final": GEMINI_BASIC,
+    "final": AZURE_GPT4O_PRECISE,
 }

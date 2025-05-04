@@ -13,12 +13,10 @@ if os.path.exists('.env'):
 else:
     print("No .env file found.")
 
-# Check if API keys are set
+# Check if Azure OpenAI API keys are set
 api_keys = {
-    "OPENAI_API_KEY": os.environ.get("OPENAI_API_KEY"),
-    "ANTHROPIC_API_KEY": os.environ.get("ANTHROPIC_API_KEY"),
-    "GEMINI_API_KEY": os.environ.get("GEMINI_API_KEY"),
-    "DEEPSEEK_API_KEY": os.environ.get("DEEPSEEK_API_KEY")
+    "AZURE_OPENAI_API_KEY": os.environ.get("AZURE_OPENAI_API_KEY"),
+    "AZURE_OPENAI_ENDPOINT": os.environ.get("AZURE_OPENAI_ENDPOINT")
 }
 
 print("\nAPI Key Status:")

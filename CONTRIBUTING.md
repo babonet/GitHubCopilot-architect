@@ -1,6 +1,6 @@
-# Contributing to CursorRules Architect V2
+# Contributing to GitHub Copilot Architect
 
-Thank you for considering contributing to CursorRules Architect! Your help is greatly appreciated. This guide explains how you can contribute to the project.
+Thank you for considering contributing to GitHub Copilot Architect! Your help is greatly appreciated. This guide explains how you can contribute to the project.
 
 ## Table of Contents
 
@@ -36,10 +36,8 @@ To get started with development, you'll need to set up your local environment.
 ### Prerequisites
 
 - Python 3.8 or higher
-- API keys for at least one of the following providers:
-  - OpenAI API key with access to `o1`, `o3-mini`, or `gpt-4.1`
-  - Anthropic API key with access to `claude-3-7-sonnet-20250219` 
-  - DeepSeek API key with access to DeepSeek Reasoner
+- Azure OpenAI API key with access to appropriate models
+- Visual Studio Code with GitHub Copilot extension
 - Git
 
 ### Installing Dependencies
@@ -47,8 +45,8 @@ To get started with development, you'll need to set up your local environment.
 Clone the repository:
 
 ```bash
-git clone https://github.com/SlyyCooper/cursorrules-architect.git
-cd cursorrules-architect
+git clone https://github.com/yourusername/githubcopilot-architect.git
+cd githubcopilot-architect
 ```
 
 Create a virtual environment and activate it:
@@ -66,34 +64,30 @@ pip install -r requirements.txt
 
 ### Setting Up API Keys
 
-Set your API keys as environment variables:
+Set your Azure OpenAI API keys as environment variables:
 
 ```bash
 # Linux/macOS
-export OPENAI_API_KEY='your-openai-api-key'
-export ANTHROPIC_API_KEY='your-anthropic-api-key'
-export DEEPSEEK_API_KEY='your-deepseek-api-key'
+export AZURE_API_KEY='your-azure-api-key'
+export AZURE_ENDPOINT='https://your-resource-name.openai.azure.com/'
 
 # Windows Command Prompt
-set OPENAI_API_KEY=your-openai-api-key
-set ANTHROPIC_API_KEY=your-anthropic-api-key
-set DEEPSEEK_API_KEY=your-deepseek-api-key
+set AZURE_API_KEY=your-azure-api-key
+set AZURE_ENDPOINT=https://your-resource-name.openai.azure.com/
 
 # Windows PowerShell
-$env:OPENAI_API_KEY='your-openai-api-key'
-$env:ANTHROPIC_API_KEY='your-anthropic-api-key'
-$env:DEEPSEEK_API_KEY='your-deepseek-api-key'
+$env:AZURE_API_KEY='your-azure-api-key'
+$env:AZURE_ENDPOINT='https://your-resource-name.openai.azure.com/'
 ```
 
 Alternatively, create a `.env` file in the project root:
 
 ```
-ANTHROPIC_API_KEY=your-anthropic-api-key
-OPENAI_API_KEY=your-openai-api-key
-DEEPSEEK_API_KEY=your-deepseek-api-key
+AZURE_API_KEY=your-azure-api-key
+AZURE_ENDPOINT=https://your-resource-name.openai.azure.com/
 ```
 
-**Important:** Ensure that your API keys have access to the required models. You can configure which models to use in `config/agents.py`.
+**Important:** Ensure that your Azure OpenAI resource has the required models deployed. You can configure which models to use in `config/agents.py`.
 
 ## How to Contribute
 
@@ -124,8 +118,8 @@ We welcome feature suggestions! Please open an issue with:
 2. **Clone Your Fork**:
 
    ```bash
-   git clone https://github.com/your-username/cursorrules-architect.git
-   cd cursorrules-architect
+   git clone https://github.com/your-username/githubcopilot-architect.git
+   cd githubcopilot-architect
    ```
 
 3. **Create a Feature Branch**:
@@ -151,9 +145,10 @@ We welcome feature suggestions! Please open an issue with:
 - **Imports**: Organize imports according to [PEP 8](https://www.python.org/dev/peps/pep-0008/#imports).
 - **Documentation**: Include docstrings for functions, classes, and modules.
 - **Architecture**: Follow the existing architectural patterns:
-  - Use the `BaseArchitect` abstract class for new AI model providers
+  - Use the `BaseArchitect` abstract class for Azure OpenAI integration
   - Keep prompts and logic separated
   - Ensure compatibility with the phase-based approach
+  - Optimize for VSCode and GitHub Copilot integration
 
 #### Commit Messages
 
@@ -199,18 +194,13 @@ python -m unittest discover tests
 
 ### Supported Models
 
-CursorRules Architect V2 supports multiple AI models:
+GitHub Copilot Architect exclusively supports Azure OpenAI models:
 
-- **Anthropic**:
-  - `claude-3-7-sonnet-20250219` (with or without reasoning)
-
-- **OpenAI**:
-  - `o1` (with low/medium/high reasoning)
-  - `o3-mini` (with low/medium/high reasoning)
-  - `gpt-4.1` (with temperature control)
-
-- **DeepSeek**:
-  - DeepSeek Reasoner (always with reasoning enabled)
+- **Azure OpenAI**:
+  - `gpt-4o` (with temperature control and reasoning modes)
+  - `gpt-4-turbo` (with temperature control and reasoning modes)
+  
+Additional models may be added as they become available in Azure OpenAI.
 
 ### Model Configuration
 
@@ -218,8 +208,8 @@ You can configure which models are used for each phase by modifying the `MODEL_C
 
 ```python
 MODEL_CONFIG = {
-    "phase1": CLAUDE_WITH_REASONING,  # Use Claude with reasoning for Phase 1
-    "phase2": O1_HIGH,                # Use OpenAI's o1 with high reasoning for Phase 2
+    "phase1": AZURE_GPT4O_PRECISE,    # Use GPT-4o with precise settings for Phase 1
+    "phase2": AZURE_GPT4O_DEFAULT,    # Use GPT-4o with default settings for Phase 2
     # etc.
 }
 ```

@@ -24,25 +24,22 @@ from typing import Dict, List, Any, Optional, Union
 
 class ReasoningMode(Enum):
     """Enum for specifying the reasoning mode for a model."""
-    # General modes (primarily for Anthropic)
+    # General modes
     ENABLED = "enabled"
     DISABLED = "disabled"
     
-    # OpenAI-specific reasoning effort levels (for O1 and O3-mini)
+    # Azure OpenAI reasoning effort levels
     LOW = "low"
     MEDIUM = "medium"
     HIGH = "high"
     
-    # For temperature-based models like gpt-4.1, use TEMPERATURE mode
+    # For temperature-based models like gpt-4o, use TEMPERATURE mode
     # and specify the actual temperature value separately
     TEMPERATURE = "temperature"
 
 class ModelProvider(Enum):
     """Enum for specifying the model provider."""
-    ANTHROPIC = "anthropic"
-    OPENAI = "openai"
-    DEEPSEEK = "deepseek"
-    GEMINI = "gemini"
+    AZURE_OPENAI = "azure_openai"
 
 # ====================================================
 # Get Logger
@@ -68,26 +65,31 @@ class BaseArchitect(ABC):
     
     def __init__(
         self, 
-        provider: ModelProvider,
-        model_name: str,
+        provider: ModelProvider = None,
+        model_name: str = None,
         reasoning: ReasoningMode = ReasoningMode.DISABLED,
         temperature: Optional[float] = None,
         name: Optional[str] = None,
         role: Optional[str] = None,
-        responsibilities: Optional[List[str]] = None
+        responsibilities: Optional[List[str]] = None,
+        model_config: Optional[Dict[str, Any]] = None,
+        system_prompt: Optional[str] = None
     ):
         """
         Initialize a BaseArchitect instance.
         
         Args:
-            provider: The model provider (Anthropic or OpenAI)
+            provider: The model provider (AZURE_OPENAI, ANTHROPIC, etc.)
             model_name: Name of the model to use
             reasoning: Reasoning mode to use (if supported by the model)
             temperature: Temperature value for temperature-based models
             name: Optional name for the architect (for specialized roles)
             role: Optional role description
             responsibilities: Optional list of responsibilities
+            model_config: Dictionary containing model configuration (for Azure OpenAI)
+            system_prompt: System prompt to use for all interactions
         """
+        # Handle traditional initialization
         self.provider = provider
         self.model_name = model_name
         self.reasoning = reasoning
@@ -95,6 +97,13 @@ class BaseArchitect(ABC):
         self.name = name
         self.role = role
         self.responsibilities = responsibilities or []
+        
+        # Handle model_config based initialization (for Azure OpenAI)
+        if model_config:
+            self.model_config = model_config
+        
+        # Set up system message
+        self.system_message = system_prompt or "You are a helpful assistant that analyzes code and provides architecture recommendations."
         
     @abstractmethod
     async def analyze(self, context: Dict[str, Any]) -> Dict[str, Any]:

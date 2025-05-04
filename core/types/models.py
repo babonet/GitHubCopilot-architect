@@ -25,94 +25,36 @@ class ModelConfig(NamedTuple):
 # These are shorthand configurations that can be referenced in the MODEL_CONFIG.
 # ====================================================
 
-CLAUDE_BASIC = ModelConfig(
-    provider=ModelProvider.ANTHROPIC,
-    model_name="claude-3-7-sonnet-20250219",
-    reasoning=ReasoningMode.DISABLED
+# ====================================================
+# Azure OpenAI Model Configurations
+# These are configurations specifically for Azure OpenAI models
+# ====================================================
+
+AZURE_GPT4O_DEFAULT = ModelConfig(
+    provider=ModelProvider.AZURE_OPENAI,
+    model_name="gpt-4o",
+    reasoning=ReasoningMode.MEDIUM,
+    temperature=0.7
 )
 
-CLAUDE_WITH_REASONING = ModelConfig(
-    provider=ModelProvider.ANTHROPIC,
-    model_name="claude-3-7-sonnet-20250219",
-    reasoning=ReasoningMode.ENABLED
+AZURE_GPT4O_CREATIVE = ModelConfig(
+    provider=ModelProvider.AZURE_OPENAI,
+    model_name="gpt-4o",
+    reasoning=ReasoningMode.MEDIUM,
+    temperature=0.9
 )
 
-# O1 configurations with different reasoning levels
-O1_HIGH = ModelConfig(
-    provider=ModelProvider.OPENAI,
-    model_name="o1",
-    reasoning=ReasoningMode.HIGH
+AZURE_GPT4O_PRECISE = ModelConfig(
+    provider=ModelProvider.AZURE_OPENAI,
+    model_name="gpt-4o",
+    reasoning=ReasoningMode.HIGH,
+    temperature=0.3
 )
 
-O1_MEDIUM = ModelConfig(
-    provider=ModelProvider.OPENAI,
-    model_name="o1",
-    reasoning=ReasoningMode.MEDIUM
+# For more powerful versions if available in your Azure subscription
+AZURE_GPT4_TURBO = ModelConfig(
+    provider=ModelProvider.AZURE_OPENAI,
+    model_name="gpt-4-turbo",
+    reasoning=ReasoningMode.MEDIUM,
+    temperature=0.7
 )
-
-O1_LOW = ModelConfig(
-    provider=ModelProvider.OPENAI,
-    model_name="o1",
-    reasoning=ReasoningMode.LOW
-)
-
-# O3-mini configurations with different reasoning levels
-O3_MINI_HIGH = ModelConfig(
-    provider=ModelProvider.OPENAI,
-    model_name="o3-mini",
-    reasoning=ReasoningMode.HIGH
-)
-
-O3_MINI_MEDIUM = ModelConfig(
-    provider=ModelProvider.OPENAI,
-    model_name="o3-mini",
-    reasoning=ReasoningMode.MEDIUM
-)
-
-O3_MINI_LOW = ModelConfig(
-    provider=ModelProvider.OPENAI,
-    model_name="o3-mini",
-    reasoning=ReasoningMode.LOW
-)
-
-# gpt-4.1 configurations with different temperature values
-GPT4_1_DEFAULT = ModelConfig(
-    provider=ModelProvider.OPENAI,
-    model_name="gpt-4.1",
-    reasoning=ReasoningMode.TEMPERATURE,
-    temperature=0.7  # Default temperature
-)
-
-GPT4_1_CREATIVE = ModelConfig(
-    provider=ModelProvider.OPENAI,
-    model_name="gpt-4.1",
-    reasoning=ReasoningMode.TEMPERATURE,
-    temperature=0.9  # Higher temperature for more creative outputs
-)
-
-GPT4_1_PRECISE = ModelConfig(
-    provider=ModelProvider.OPENAI,
-    model_name="gpt-4.1",
-    reasoning=ReasoningMode.TEMPERATURE,
-    temperature=0.2  # Lower temperature for more precise/deterministic outputs
-)
-
-# DeepSeek configurations
-DEEPSEEK_REASONER = ModelConfig(
-    provider=ModelProvider.DEEPSEEK,
-    model_name="deepseek-reasoner",
-    reasoning=ReasoningMode.ENABLED  # Always enabled for reasoner
-)
-
-# Gemini configurations
-GEMINI_BASIC = ModelConfig(
-    provider=ModelProvider.GEMINI,
-    model_name="gemini-2.5-flash-preview-04-17",
-    reasoning=ReasoningMode.DISABLED
-)
-
-GEMINI_WITH_REASONING = ModelConfig(
-    provider=ModelProvider.GEMINI,
-    model_name="gemini-2.5-pro-preview-03-25",
-    reasoning=ReasoningMode.ENABLED
-) 

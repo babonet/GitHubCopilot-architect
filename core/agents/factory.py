@@ -10,10 +10,7 @@ based on the model configuration defined in config/agents.py.
 
 from typing import Any, Dict
 from .base import ModelProvider, ReasoningMode
-from .anthropic import AnthropicArchitect
-from .openai import OpenAIArchitect
-from .deepseek import DeepSeekArchitect
-from .gemini import GeminiArchitect
+from .azure_openai import AzureOpenAIArchitect
 
 def get_architect_for_phase(phase: str, **kwargs) -> Any:
     """
@@ -33,31 +30,18 @@ def get_architect_for_phase(phase: str, **kwargs) -> Any:
     config = MODEL_CONFIG.get(phase)
     if not config:
         raise ValueError(f"No model configuration found for phase '{phase}'")
-    
-    # Create the appropriate architect instance
-    if config.provider == ModelProvider.ANTHROPIC:
-        return AnthropicArchitect(
-            model_name=config.model_name,
-            reasoning=config.reasoning,
-            **kwargs
-        )
-    elif config.provider == ModelProvider.OPENAI:
-        return OpenAIArchitect(
-            model_name=config.model_name,
-            reasoning=config.reasoning,
-            temperature=config.temperature,
-            **kwargs
-        )
-    elif config.provider == ModelProvider.DEEPSEEK:
-        # DeepSeek Reasoner has fixed parameters
-        return DeepSeekArchitect(
-            **kwargs  # Only pass the kwargs, other params are fixed in DeepSeekArchitect
-        )
-    elif config.provider == ModelProvider.GEMINI:
-        return GeminiArchitect(
-            model_name=config.model_name,
-            reasoning=config.reasoning,
-            **kwargs
+      # Create the appropriate architect instance
+    if config.provider == ModelProvider.AZURE_OPENAI:
+        return AzureOpenAIArchitect(
+            model_config={
+                "deployment": config.model_name,
+                "model": config.model_name,
+                "reasoning_mode": config.reasoning,
+                "temperature": config.temperature,
+                "max_tokens": kwargs.get("max_tokens", 4096),
+                "top_p": kwargs.get("top_p", 0.95)
+            },
+            system_prompt=kwargs.get("system_prompt")
         )
     else:
-        raise ValueError(f"Unknown model provider: {config.provider}") 
+        raise ValueError(f"Only Azure OpenAI provider is supported: {config.provider}")

@@ -1,15 +1,14 @@
-# 🦊 CursorRules Architect V2
+# 🦊 GitHub Copilot Architect
 
 <div align="center">
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-[![OpenAI](https://img.shields.io/badge/OpenAI-o1%20%7C%20o3--mini%20%7C%20gpt--4o-blue.svg)](https://openai.com/)
-[![Anthropic](https://img.shields.io/badge/Anthropic-claude--3.7--sonnet-purple.svg)](https://www.anthropic.com/)
-[![DeepSeek](https://img.shields.io/badge/DeepSeek-deepseek--reasoner-red.svg)](https://deepseek.com/)
-[![Google](https://img.shields.io/badge/Google-gemini--2.0--flash%20%7C%20gemini--2.5--pro-green.svg)](https://ai.google.dev/)
+[![Azure OpenAI](https://img.shields.io/badge/Azure%20OpenAI-gpt--4o-blue.svg)](https://azure.microsoft.com/products/ai-services/openai-service)
+[![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-Enabled-brightgreen.svg)](https://github.com/features/copilot)
+[![VSCode](https://img.shields.io/badge/VSCode-Extension-blue.svg)](https://code.visualstudio.com/)
 [![Built By](https://img.shields.io/badge/Built%20By-SlyyCooper-orange.svg)](https://github.com/SlyyCooper)
 
-**Your Multi-Provider AI Code Analysis and .cursorrules Generator 🚀**
+**Your Azure AI-powered Code Analysis and Architecture Generator 🚀**
 
 [Features](#-features) • [Requirements](#-requirements) • [Installation](#-installation) • [Usage](#-usage) • [Configuration](#-configuration) • [Architecture](#-architecture) • [Output](#-output) • [Contributing](#-contributing)
 
@@ -17,12 +16,12 @@
 
 ## 🌟 What's This All About?
 
-CursorRules Architect V2 is an advanced multi-agent system that analyzes your codebase using a powerful combination of AI models from Anthropic, OpenAI, DeepSeek, and Google. It performs a comprehensive six-phase analysis to understand your project's structure, dependencies, patterns, and architectural decisions. The result is a detailed report and automatically generated `.cursorrules` and `.cursorignore` files customized for your project.
+GitHub Copilot Architect is an advanced AI-powered system that analyzes your codebase using Azure OpenAI's powerful models. It performs a comprehensive six-phase analysis to understand your project's structure, dependencies, patterns, and architectural decisions. The result is a detailed report and architecture recommendations optimized for Visual Studio Code and GitHub Copilot integration.
 
 ## ✨ Features
 
-- 🌐 **Multi-Provider Support** - Leverage AI models from Anthropic, OpenAI, DeepSeek, and Google Gemini
-- 🧠 **Enhanced Reasoning** - Different reasoning modes (enabled/disabled, low/medium/high, temperature)
+- 🌐 **Azure OpenAI Integration** - Leverage Azure's enterprise-grade AI models for secure, reliable analysis
+- 🧠 **Enhanced Reasoning** - Different reasoning modes and temperature settings to balance creativity and precision
 - 🤖 **Dynamic Agents** - Creates specialized analysis agents based on your specific codebase
 - 🔍 **Six-Phase Analysis** - Structured pipeline that builds comprehensive understanding
 - 🔄 **Async Processing** - Parallel agent execution for faster analysis
@@ -204,16 +203,13 @@ EXCLUDED_EXTENSIONS = {
 
 ## 🏗️ Architecture
 
-CursorRules Architect V2 follows a sophisticated multi-phase analysis approach:
+GitHub Copilot Architect follows a sophisticated multi-phase analysis approach:
 
 ### 1. Base Architecture
 
-The system is built on a `BaseArchitect` abstract class that standardizes how different AI model providers are integrated:
+The system is built on a `BaseArchitect` abstract class that standardizes how the Azure OpenAI models are integrated:
 
-- `AnthropicArchitect` - Interface to Anthropic's Claude models
-- `OpenAIArchitect` - Interface to OpenAI's models (o1, o3-mini, gpt-4.1)
-- `DeepSeekArchitect` - Interface to DeepSeek's reasoning models
-- `GeminiArchitect` - Interface to Google's Gemini models
+- `AzureOpenAIArchitect` - Interface to Azure OpenAI's models (gpt-4o, gpt-4-turbo)
 
 Each architect implements standardized methods:
 - `analyze()` - Runs general analysis
