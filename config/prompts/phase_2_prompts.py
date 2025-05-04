@@ -81,24 +81,29 @@ Describe your approach or reasoning here.
 
 """
 
-def format_phase2_prompt(phase1_results: Dict, project_structure: List[str] = None) -> str:
+from typing import Optional
+
+
+def format_phase2_prompt(
+    phase1_results: Dict, project_structure: Optional[List[str]] = None
+) -> str:
     """
     Format the Phase 2 prompt with the Phase 1 results and project structure.
-    
+
     Args:
         phase1_results: Dictionary containing the results from Phase 1
         project_structure: List of strings representing the project tree structure
-        
+
     Returns:
         Formatted prompt string
     """
     # Format the project structure
     if project_structure is None:
         project_structure = ["No project structure provided"]
-    
+
     structure_str = "\n".join(project_structure)
-    
+
     return PHASE_2_PROMPT.format(
         phase1_results=json.dumps(phase1_results, indent=2),
-        project_structure=structure_str
+        project_structure=structure_str,
     )
